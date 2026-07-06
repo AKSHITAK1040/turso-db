@@ -1,95 +1,40 @@
 {
-  "generatedAt": "2026-07-06T16:23:19.488Z",
+  "generatedAt": "2026-07-06T00:00:00.000Z",
   "project": "SET Engine",
   "traces": [
     {
-      "traceId": "trace_write_001",
-      "writeId": "write_001",
+      "traceId": "trace_fallback_001",
+      "writeId": "write_fb_001",
       "databaseId": "db_agent_001",
       "tenantId": "tenant_hash_001",
       "actorId": "actor_hash_001",
       "table": "documents",
-      "operation": "insert",
+      "operation": "update",
       "finalState": "synced",
       "blockReason": "NONE",
       "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_001 for table documents at local version 11."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_001 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_001 entered the local sync queue for tenant tenant_hash_001."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_001."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_001 and actor actor_hash_001."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "Remote snapshot at version 10 is fresh enough for local base version 10."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "No vector-memory freshness check was needed for documents."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "pass",
-          "reason": "clear",
-          "details": "No remote row exists for this write target, so the write can proceed without a row-level conflict."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "pass",
-          "reason": "healthy",
-          "details": "Remote apply is healthy for database db_agent_001."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "pass",
-          "reason": "completed",
-          "details": "Remote changes were refreshed after the write applied successfully."
-        }
+        { "gateName": "Local write accepted", "status": "pass", "reason": "accepted", "details": "Write accepted locally." },
+        { "gateName": "WAL entry created", "status": "pass", "reason": "durable", "details": "WAL marker written." },
+        { "gateName": "Sync queue admitted", "status": "pass", "reason": "queued", "details": "Queued for sync." },
+        { "gateName": "Network available check", "status": "pass", "reason": "online", "details": "Network is available." },
+        { "gateName": "Auth check", "status": "pass", "reason": "valid", "details": "Auth token is valid." },
+        { "gateName": "Schema version check", "status": "pass", "reason": "matched", "details": "Schema matches." },
+        { "gateName": "Pull freshness check", "status": "pass", "reason": "fresh", "details": "Pull is fresh enough." },
+        { "gateName": "Vector memory freshness check", "status": "pass", "reason": "fresh", "details": "Not a vector write." },
+        { "gateName": "Conflict check", "status": "pass", "reason": "clear", "details": "No conflict." },
+        { "gateName": "Remote apply check", "status": "pass", "reason": "healthy", "details": "Remote apply healthy." },
+        { "gateName": "Pull update check", "status": "pass", "reason": "completed", "details": "Pull update completed." }
       ],
       "evaluatedGateCount": 11,
       "passedGateCount": 11,
       "warningGateCount": 0,
       "failedGate": "NONE",
       "suggestedResolution": "safe_to_apply",
-      "debugSummary": "write_001 reached final consistency with no block reason; 11 gates passed and 0 warnings."
+      "debugSummary": "Fallback synced trace."
     },
     {
-      "traceId": "trace_write_002",
-      "writeId": "write_002",
+      "traceId": "trace_fallback_002",
+      "writeId": "write_fb_002",
       "databaseId": "db_agent_001",
       "tenantId": "tenant_hash_001",
       "actorId": "actor_hash_002",
@@ -98,998 +43,168 @@
       "finalState": "pending_offline",
       "blockReason": "NETWORK_OFFLINE",
       "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_002 for table documents at local version 12."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_002 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_002 entered the local sync queue for tenant tenant_hash_001."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "fail",
-          "reason": "offline",
-          "details": "Remote connectivity is unavailable, so write_002 stays pending offline."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
+        { "gateName": "Local write accepted", "status": "pass", "reason": "accepted", "details": "Write accepted locally." },
+        { "gateName": "WAL entry created", "status": "pass", "reason": "durable", "details": "WAL marker written." },
+        { "gateName": "Sync queue admitted", "status": "pass", "reason": "queued", "details": "Queued for sync." },
+        { "gateName": "Network available check", "status": "fail", "reason": "offline", "details": "Network is offline." },
+        { "gateName": "Auth check", "status": "skipped", "reason": "stopped", "details": "Skipped after offline block." },
+        { "gateName": "Schema version check", "status": "skipped", "reason": "stopped", "details": "Skipped after offline block." },
+        { "gateName": "Pull freshness check", "status": "skipped", "reason": "stopped", "details": "Skipped after offline block." },
+        { "gateName": "Vector memory freshness check", "status": "skipped", "reason": "stopped", "details": "Skipped after offline block." },
+        { "gateName": "Conflict check", "status": "skipped", "reason": "stopped", "details": "Skipped after offline block." },
+        { "gateName": "Remote apply check", "status": "skipped", "reason": "stopped", "details": "Skipped after offline block." },
+        { "gateName": "Pull update check", "status": "skipped", "reason": "stopped", "details": "Skipped after offline block." }
       ],
       "evaluatedGateCount": 4,
       "passedGateCount": 3,
       "warningGateCount": 0,
       "failedGate": "Network available check",
       "suggestedResolution": "retry_when_online",
-      "debugSummary": "write_002 reached Network available check with NETWORK_OFFLINE; 3 gates passed and 0 warnings."
+      "debugSummary": "Fallback offline trace."
     },
     {
-      "traceId": "trace_write_003",
-      "writeId": "write_003",
+      "traceId": "trace_fallback_003",
+      "writeId": "write_fb_003",
       "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_001",
+      "tenantId": "tenant_hash_002",
       "actorId": "actor_hash_003",
-      "table": "documents",
-      "operation": "update",
-      "finalState": "retry_scheduled",
-      "blockReason": "NETWORK_OFFLINE",
-      "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_003 for table documents at local version 13."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_003 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_003 entered the local sync queue for tenant tenant_hash_001."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "warning",
-          "reason": "transient",
-          "details": "Network was reachable but unstable for write_003; the engine scheduled a retry instead of pushing immediately."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Network available check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
-      ],
-      "evaluatedGateCount": 4,
-      "passedGateCount": 3,
-      "warningGateCount": 1,
-      "failedGate": "Network available check",
-      "suggestedResolution": "retry_when_online",
-      "debugSummary": "write_003 reached Network available check with NETWORK_OFFLINE; 3 gates passed and 1 warnings."
-    },
-    {
-      "traceId": "trace_write_004",
-      "writeId": "write_004",
-      "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_001",
-      "actorId": "actor_hash_004",
-      "table": "documents",
+      "table": "projects",
       "operation": "update",
       "finalState": "conflict_blocked",
       "blockReason": "REMOTE_ROW_CONFLICT",
       "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_004 for table documents at local version 14."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_004 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_004 entered the local sync queue for tenant tenant_hash_001."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_004."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_001 and actor actor_hash_004."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "Remote snapshot at version 6 is fresh enough for local base version 4."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "No vector-memory freshness check was needed for documents."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "fail",
-          "reason": "conflict",
-          "details": "The local write was based on an older remote version than the current row version, so the sync engine should pull first and replay the write."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Conflict check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Conflict check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
+        { "gateName": "Local write accepted", "status": "pass", "reason": "accepted", "details": "Write accepted locally." },
+        { "gateName": "WAL entry created", "status": "pass", "reason": "durable", "details": "WAL marker written." },
+        { "gateName": "Sync queue admitted", "status": "pass", "reason": "queued", "details": "Queued for sync." },
+        { "gateName": "Network available check", "status": "pass", "reason": "online", "details": "Network is available." },
+        { "gateName": "Auth check", "status": "pass", "reason": "valid", "details": "Auth token is valid." },
+        { "gateName": "Schema version check", "status": "pass", "reason": "matched", "details": "Schema matches." },
+        { "gateName": "Pull freshness check", "status": "pass", "reason": "fresh", "details": "Pull is fresh enough." },
+        { "gateName": "Vector memory freshness check", "status": "pass", "reason": "fresh", "details": "Not a vector write." },
+        { "gateName": "Conflict check", "status": "fail", "reason": "conflict", "details": "Remote row version is newer." },
+        { "gateName": "Remote apply check", "status": "skipped", "reason": "stopped", "details": "Skipped after conflict block." },
+        { "gateName": "Pull update check", "status": "skipped", "reason": "stopped", "details": "Skipped after conflict block." }
       ],
       "evaluatedGateCount": 9,
       "passedGateCount": 8,
       "warningGateCount": 0,
       "failedGate": "Conflict check",
       "suggestedResolution": "pull_remote_then_replay_local_write",
-      "debugSummary": "write_004 reached Conflict check with REMOTE_ROW_CONFLICT; 8 gates passed and 0 warnings."
+      "debugSummary": "Fallback conflict trace."
     },
     {
-      "traceId": "trace_write_005",
-      "writeId": "write_005",
+      "traceId": "trace_fallback_004",
+      "writeId": "write_fb_004",
       "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_002",
-      "actorId": "actor_hash_005",
-      "table": "projects",
-      "operation": "update",
+      "tenantId": "tenant_hash_003",
+      "actorId": "actor_hash_004",
+      "table": "vector_memory",
+      "operation": "vector_memory_upsert",
       "finalState": "schema_blocked",
       "blockReason": "SCHEMA_VERSION_MISMATCH",
       "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_005 for table projects at local version 3."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_005 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_005 entered the local sync queue for tenant tenant_hash_002."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_005."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_002 and actor actor_hash_005."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "fail",
-          "reason": "mismatch",
-          "details": "Local schema version 4 does not match remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Schema version check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Schema version check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "skipped",
-          "reason": "Stopped after Schema version check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Schema version check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Schema version check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
+        { "gateName": "Local write accepted", "status": "pass", "reason": "accepted", "details": "Write accepted locally." },
+        { "gateName": "WAL entry created", "status": "pass", "reason": "durable", "details": "WAL marker written." },
+        { "gateName": "Sync queue admitted", "status": "pass", "reason": "queued", "details": "Queued for sync." },
+        { "gateName": "Network available check", "status": "pass", "reason": "online", "details": "Network is available." },
+        { "gateName": "Auth check", "status": "pass", "reason": "valid", "details": "Auth token is valid." },
+        { "gateName": "Schema version check", "status": "fail", "reason": "mismatch", "details": "Local schema is behind." },
+        { "gateName": "Pull freshness check", "status": "skipped", "reason": "stopped", "details": "Skipped after schema block." },
+        { "gateName": "Vector memory freshness check", "status": "skipped", "reason": "stopped", "details": "Skipped after schema block." },
+        { "gateName": "Conflict check", "status": "skipped", "reason": "stopped", "details": "Skipped after schema block." },
+        { "gateName": "Remote apply check", "status": "skipped", "reason": "stopped", "details": "Skipped after schema block." },
+        { "gateName": "Pull update check", "status": "skipped", "reason": "stopped", "details": "Skipped after schema block." }
       ],
       "evaluatedGateCount": 6,
       "passedGateCount": 5,
       "warningGateCount": 0,
       "failedGate": "Schema version check",
       "suggestedResolution": "upgrade_local_schema",
-      "debugSummary": "write_005 reached Schema version check with SCHEMA_VERSION_MISMATCH; 5 gates passed and 0 warnings."
+      "debugSummary": "Fallback schema trace."
     },
     {
-      "traceId": "trace_write_006",
-      "writeId": "write_006",
+      "traceId": "trace_fallback_005",
+      "writeId": "write_fb_005",
       "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_003",
-      "actorId": "actor_hash_006",
-      "table": "vector_memory",
+      "tenantId": "tenant_hash_004",
+      "actorId": "actor_hash_005",
+      "table": "memory_index",
       "operation": "vector_memory_upsert",
       "finalState": "stale_vector_memory",
       "blockReason": "STALE_EMBEDDING_VERSION",
       "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_006 for table vector_memory at local version 21."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_006 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_006 entered the local sync queue for tenant tenant_hash_003."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_006."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_003 and actor actor_hash_006."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "Remote snapshot at version 21 is fresh enough for local base version 21."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "warning",
-          "reason": "stale_embedding",
-          "details": "The local embedding model is older than the remote metadata, so the vector memory row should be refreshed before replay."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "skipped",
-          "reason": "Stopped after Vector memory freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Vector memory freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Vector memory freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
+        { "gateName": "Local write accepted", "status": "pass", "reason": "accepted", "details": "Write accepted locally." },
+        { "gateName": "WAL entry created", "status": "pass", "reason": "durable", "details": "WAL marker written." },
+        { "gateName": "Sync queue admitted", "status": "pass", "reason": "queued", "details": "Queued for sync." },
+        { "gateName": "Network available check", "status": "pass", "reason": "online", "details": "Network is available." },
+        { "gateName": "Auth check", "status": "pass", "reason": "valid", "details": "Auth token is valid." },
+        { "gateName": "Schema version check", "status": "pass", "reason": "matched", "details": "Schema matches." },
+        { "gateName": "Pull freshness check", "status": "pass", "reason": "fresh", "details": "Pull is fresh enough." },
+        { "gateName": "Vector memory freshness check", "status": "warning", "reason": "stale_embedding", "details": "Embedding metadata is stale." },
+        { "gateName": "Conflict check", "status": "skipped", "reason": "stopped", "details": "Skipped after stale embedding." },
+        { "gateName": "Remote apply check", "status": "skipped", "reason": "stopped", "details": "Skipped after stale embedding." },
+        { "gateName": "Pull update check", "status": "skipped", "reason": "stopped", "details": "Skipped after stale embedding." }
       ],
       "evaluatedGateCount": 8,
       "passedGateCount": 7,
       "warningGateCount": 1,
       "failedGate": "Vector memory freshness check",
       "suggestedResolution": "recompute_embedding",
-      "debugSummary": "write_006 reached Vector memory freshness check with STALE_EMBEDDING_VERSION; 7 gates passed and 1 warnings."
-    },
-    {
-      "traceId": "trace_write_007",
-      "writeId": "write_007",
-      "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_003",
-      "actorId": "actor_hash_007",
-      "table": "tasks",
-      "operation": "delete",
-      "finalState": "delete_synced",
-      "blockReason": "NONE",
-      "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_007 for table tasks at local version 9."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_007 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_007 entered the local sync queue for tenant tenant_hash_003."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_007."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_003 and actor actor_hash_007."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "Remote snapshot at version 8 is fresh enough for local base version 8."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "No vector-memory freshness check was needed for tasks."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "pass",
-          "reason": "clear",
-          "details": "The row is aligned with the local base version and can be applied safely."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "pass",
-          "reason": "healthy",
-          "details": "Remote apply is healthy for database db_agent_001."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "pass",
-          "reason": "completed",
-          "details": "Delete tombstone and post-apply pull update completed successfully."
-        }
-      ],
-      "evaluatedGateCount": 11,
-      "passedGateCount": 11,
-      "warningGateCount": 0,
-      "failedGate": "NONE",
-      "suggestedResolution": "safe_to_apply",
-      "debugSummary": "write_007 reached final consistency with no block reason; 11 gates passed and 0 warnings."
-    },
-    {
-      "traceId": "trace_write_008",
-      "writeId": "write_008",
-      "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_004",
-      "actorId": "actor_hash_008",
-      "table": "sessions",
-      "operation": "update",
-      "finalState": "auth_blocked",
-      "blockReason": "AUTH_EXPIRED",
-      "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_008 for table sessions at local version 6."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_008 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_008 entered the local sync queue for tenant tenant_hash_004."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_008."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "fail",
-          "reason": "expired",
-          "details": "Authentication is invalid for tenant tenant_hash_004; refresh the token before retrying."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "skipped",
-          "reason": "Stopped after Auth check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Auth check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Auth check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "skipped",
-          "reason": "Stopped after Auth check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Auth check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Auth check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
-      ],
-      "evaluatedGateCount": 5,
-      "passedGateCount": 4,
-      "warningGateCount": 0,
-      "failedGate": "Auth check",
-      "suggestedResolution": "refresh_auth_token",
-      "debugSummary": "write_008 reached Auth check with AUTH_EXPIRED; 4 gates passed and 0 warnings."
-    },
-    {
-      "traceId": "trace_write_009",
-      "writeId": "write_009",
-      "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_005",
-      "actorId": "actor_hash_009",
-      "table": "notes",
-      "operation": "update",
-      "finalState": "pull_required",
-      "blockReason": "PULL_REQUIRED_BEFORE_PUSH",
-      "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_009 for table notes at local version 18."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_009 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_009 entered the local sync queue for tenant tenant_hash_005."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_009."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_005 and actor actor_hash_009."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "fail",
-          "reason": "stale",
-          "details": "Local base version 14 is ahead of the last pulled remote version 11."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
-      ],
-      "evaluatedGateCount": 7,
-      "passedGateCount": 6,
-      "warningGateCount": 0,
-      "failedGate": "Pull freshness check",
-      "suggestedResolution": "pull_remote_then_replay_local_write",
-      "debugSummary": "write_009 reached Pull freshness check with PULL_REQUIRED_BEFORE_PUSH; 6 gates passed and 0 warnings."
-    },
-    {
-      "traceId": "trace_write_010",
-      "writeId": "write_010",
-      "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_batch_001",
-      "actorId": "actor_hash_010",
-      "table": "batch_items",
-      "operation": "insert",
-      "finalState": "synced",
-      "blockReason": "NONE",
-      "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_010 for table batch_items at local version 22."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_010 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_010 entered the local sync queue for tenant tenant_hash_batch_001."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_010."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_batch_001 and actor actor_hash_010."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "Remote snapshot at version 20 is fresh enough for local base version 20."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "No vector-memory freshness check was needed for batch_items."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "pass",
-          "reason": "clear",
-          "details": "The row is aligned with the local base version and can be applied safely."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "pass",
-          "reason": "healthy",
-          "details": "Remote apply is healthy for database db_agent_001."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "pass",
-          "reason": "completed",
-          "details": "Remote changes were refreshed after the write applied successfully."
-        }
-      ],
-      "evaluatedGateCount": 11,
-      "passedGateCount": 11,
-      "warningGateCount": 0,
-      "failedGate": "NONE",
-      "suggestedResolution": "safe_to_apply",
-      "debugSummary": "write_010 reached final consistency with no block reason; 11 gates passed and 0 warnings."
-    },
-    {
-      "traceId": "trace_write_011",
-      "writeId": "write_011",
-      "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_batch_001",
-      "actorId": "actor_hash_011",
-      "table": "batch_items",
-      "operation": "update",
-      "finalState": "remote_apply_failed",
-      "blockReason": "REMOTE_APPLY_FAILED",
-      "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_011 for table batch_items at local version 23."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_011 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_011 entered the local sync queue for tenant tenant_hash_batch_001."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_011."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_batch_001 and actor actor_hash_011."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "Remote snapshot at version 21 is fresh enough for local base version 21."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "pass",
-          "reason": "fresh",
-          "details": "No vector-memory freshness check was needed for batch_items."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "pass",
-          "reason": "clear",
-          "details": "The row is aligned with the local base version and can be applied safely."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "fail",
-          "reason": "unhealthy",
-          "details": "Remote apply is currently unhealthy for database db_agent_001; retry after availability recovers."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Remote apply check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
-      ],
-      "evaluatedGateCount": 10,
-      "passedGateCount": 9,
-      "warningGateCount": 0,
-      "failedGate": "Remote apply check",
-      "suggestedResolution": "wait_for_remote_apply",
-      "debugSummary": "write_011 reached Remote apply check with REMOTE_APPLY_FAILED; 9 gates passed and 0 warnings."
-    },
-    {
-      "traceId": "trace_write_012",
-      "writeId": "write_012",
-      "databaseId": "db_agent_001",
-      "tenantId": "tenant_hash_batch_001",
-      "actorId": "actor_hash_012",
-      "table": "cache_entries",
-      "operation": "update",
-      "finalState": "pull_required",
-      "blockReason": "PULL_REQUIRED_BEFORE_PUSH",
-      "gateResults": [
-        {
-          "gateName": "Local write accepted",
-          "status": "pass",
-          "reason": "accepted",
-          "details": "Accepted write write_012 for table cache_entries at local version 24."
-        },
-        {
-          "gateName": "WAL entry created",
-          "status": "pass",
-          "reason": "durable",
-          "details": "Created a WAL-inspired durability marker for write_012 before sync evaluation continued."
-        },
-        {
-          "gateName": "Sync queue admitted",
-          "status": "pass",
-          "reason": "queued",
-          "details": "Write write_012 entered the local sync queue for tenant tenant_hash_batch_001."
-        },
-        {
-          "gateName": "Network available check",
-          "status": "pass",
-          "reason": "online",
-          "details": "Network and remote availability look healthy for write_012."
-        },
-        {
-          "gateName": "Auth check",
-          "status": "pass",
-          "reason": "valid",
-          "details": "Auth token is valid for tenant tenant_hash_batch_001 and actor actor_hash_012."
-        },
-        {
-          "gateName": "Schema version check",
-          "status": "pass",
-          "reason": "matched",
-          "details": "Local schema version 5 matches remote schema version 5."
-        },
-        {
-          "gateName": "Pull freshness check",
-          "status": "fail",
-          "reason": "stale",
-          "details": "Local base version 18 is ahead of the last pulled remote version 16."
-        },
-        {
-          "gateName": "Vector memory freshness check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Conflict check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Remote apply check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        },
-        {
-          "gateName": "Pull update check",
-          "status": "skipped",
-          "reason": "Stopped after Pull freshness check.",
-          "details": "Evaluation stopped earlier in the sync pipeline."
-        }
-      ],
-      "evaluatedGateCount": 7,
-      "passedGateCount": 6,
-      "warningGateCount": 0,
-      "failedGate": "Pull freshness check",
-      "suggestedResolution": "pull_remote_then_replay_local_write",
-      "debugSummary": "write_012 reached Pull freshness check with PULL_REQUIRED_BEFORE_PUSH; 6 gates passed and 0 warnings."
+      "debugSummary": "Fallback stale embedding trace."
     }
   ],
   "summary": {
-    "totalWritesEvaluated": 12,
-    "writesSynced": 3,
-    "writesPending": 3,
-    "writesRetried": 1,
+    "totalWritesEvaluated": 5,
+    "writesSynced": 1,
+    "writesPending": 1,
+    "writesRetried": 0,
     "writesConflicted": 1,
     "writesBlockedBySchema": 1,
-    "writesBlockedByAuth": 1,
+    "writesBlockedByAuth": 0,
     "staleVectorMemories": 1,
-    "remoteApplyFailures": 1,
-    "mostCommonBlockReason": "NETWORK_OFFLINE",
-    "mostCommonBlockReasonCount": 2,
+    "remoteApplyFailures": 0,
+    "mostCommonBlockReason": "NONE",
+    "mostCommonBlockReasonCount": 1,
     "finalStateCounts": {
-      "synced": 2,
+      "synced": 1,
       "pending_offline": 1,
-      "retry_scheduled": 1,
+      "retry_scheduled": 0,
       "conflict_blocked": 1,
       "schema_blocked": 1,
-      "auth_blocked": 1,
-      "pull_required": 2,
+      "auth_blocked": 0,
+      "pull_required": 0,
       "stale_vector_memory": 1,
-      "remote_apply_failed": 1,
-      "delete_synced": 1
+      "remote_apply_failed": 0,
+      "delete_synced": 0
     },
     "blockReasonCounts": {
-      "NONE": 3,
-      "NETWORK_OFFLINE": 2,
-      "AUTH_EXPIRED": 1,
+      "NONE": 1,
+      "NETWORK_OFFLINE": 1,
+      "AUTH_EXPIRED": 0,
       "SCHEMA_VERSION_MISMATCH": 1,
       "REMOTE_ROW_CONFLICT": 1,
-      "PULL_REQUIRED_BEFORE_PUSH": 2,
+      "PULL_REQUIRED_BEFORE_PUSH": 0,
       "STALE_EMBEDDING_VERSION": 1,
-      "REMOTE_APPLY_FAILED": 1
+      "REMOTE_APPLY_FAILED": 0
     },
     "dropCountByGate": {
-      "Network available check": 2,
+      "Network available check": 1,
       "Conflict check": 1,
       "Schema version check": 1,
-      "Vector memory freshness check": 1,
-      "Auth check": 1,
-      "Pull freshness check": 2,
-      "Remote apply check": 1
+      "Vector memory freshness check": 1
     },
     "suggestedFixes": [
-      {
-        "blockReason": "NETWORK_OFFLINE",
-        "issueTitle": "Connectivity is unavailable",
-        "explanation": "Writes are safe locally but waiting for connectivity.",
-        "suggestedAction": "Queue writes locally and retry once the device reconnects."
-      },
-      {
-        "blockReason": "PULL_REQUIRED_BEFORE_PUSH",
-        "issueTitle": "Remote pull required first",
-        "explanation": "The local base version is behind the last pulled remote version.",
-        "suggestedAction": "Pull the latest remote state before replaying the write."
-      },
-      {
-        "blockReason": "AUTH_EXPIRED",
-        "issueTitle": "Authentication expired",
-        "explanation": "The remote sync gate could not authorize the write.",
-        "suggestedAction": "Refresh the auth token and replay the queue item."
-      },
       {
         "blockReason": "SCHEMA_VERSION_MISMATCH",
         "issueTitle": "Schema migration drift",
         "explanation": "The local schema is behind the remote schema contract.",
         "suggestedAction": "Run the migration before replaying tenant writes."
+      },
+      {
+        "blockReason": "NETWORK_OFFLINE",
+        "issueTitle": "Connectivity is unavailable",
+        "explanation": "Writes are safe locally but waiting for connectivity.",
+        "suggestedAction": "Queue writes locally and retry once the device reconnects."
       },
       {
         "blockReason": "REMOTE_ROW_CONFLICT",
@@ -1102,12 +217,6 @@
         "issueTitle": "Embedding metadata is stale",
         "explanation": "Vector memory rows need a freshness check before sync can continue.",
         "suggestedAction": "Recompute embeddings and refresh the index metadata."
-      },
-      {
-        "blockReason": "REMOTE_APPLY_FAILED",
-        "issueTitle": "Remote apply instability",
-        "explanation": "The remote side was healthy enough to reach the gate, but apply failed.",
-        "suggestedAction": "Retry sync after remote availability recovers."
       }
     ]
   }
